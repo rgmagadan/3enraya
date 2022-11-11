@@ -17,11 +17,11 @@ class Partida {
     }
     _cambiarTurno() {
         this._jugadorQueTieneElTurno = (this._jugadorQueTieneElTurno.ficha == 'X') ? this._jugadorO : this._jugadorX;
-        marcador.innerText = 'Es el turno de ' + this._jugadorQueTieneElTurno.ficha;
+        setTimeout(() => marcador.innerText = 'Es el turno de ' + this._jugadorQueTieneElTurno.ficha, 100);
         if (this._jugadorQueTieneElTurno.tipo == 'humano') {
             Tablero.ponerManejadores();
         } else {
-            this._juegaMaquina();
+            setTimeout(() => this._juegaMaquina(), 500);
         }
     }
     colocarPosicionInicial() {

@@ -1,3 +1,6 @@
 table, tr, td {
     border: none;
 }
+audio {
+    display: none;
+}

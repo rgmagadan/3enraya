@@ -26,6 +26,7 @@ class Tablero {
     }
     static ponerFichaEnCasilla(ficha, casilla) {
         casilla.innerText = ficha;
+        document.querySelector('audio').play();
         casilla.onclick = '';
     }
     static obtenerPosicion() {
