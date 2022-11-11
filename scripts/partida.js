@@ -36,10 +36,12 @@ class Partida {
     comprobarSituacion() {
         Tablero.quitarManejadores();
         if (Tablero.tieneTresEnRaya(this._jugadorQueTieneElTurno.ficha, Tablero.obtenerPosicion())) {
-            marcador.innerText = `${this._jugadorQueTieneElTurno.ficha} ha ganado la partida.`;
+            document.querySelector('#victoria').play();
+            setTimeout(() => marcador.innerText = `${this._jugadorQueTieneElTurno.ficha} ha ganado la partida.`, 500);
             empezar.disabled = false;
         } else if (!Tablero.tieneCasillaLibre(Tablero.obtenerPosicion())) {
-            marcador.innerText = 'La partida ha terminado en empate.';
+            document.querySelector('#empate').play();
+            setTimeout(() => marcador.innerText = 'La partida ha terminado en empate.', 100);
             empezar.disabled = false;
         } else {
             this._cambiarTurno();
