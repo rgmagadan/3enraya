@@ -1,33 +1,26 @@
 class Tablero {
+    
     static posicionInicial() {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 tablero.rows[i].cells[j].innerText = '·';
+                tablero.rows[i].cells[j].ariaLabel = tablero.rows[i].cells[j].id;
+                tablero.rows[i].cells[j].role = 'button';
             }
         }
     }
     static ponerManejadores() {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
-                if (tablero.rows[i].cells[j].textContent == '·') {
-                    tablero.rows[i].cells[j].onclick = ponerFicha;
-                }
-            }
-        }
-    }
-    static quitarManejadores() {
-        for (let i = 0; i < 3; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (tablero.rows[i].cells[j].onclick != '') {
-                    tablero.rows[i].cells[j].onclick = '';
-                }
+                    tablero.rows[i].cells[j].addEventListener('click', ponerFicha);
+                    tablero.rows[i].cells[j].addEventListener('keydown', ponerFicha);
             }
         }
     }
     static ponerFichaEnCasilla(ficha, casilla) {
         casilla.innerText = ficha;
+        casilla.ariaLabel = `${ficha}, ${casilla.ariaLabel}`;
         document.querySelector('#movimiento').play();
-        casilla.onclick = '';
     }
     static obtenerPosicion() {
         let posicion = [Array(3), Array(3), Array(3)];
