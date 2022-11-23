@@ -1,10 +1,40 @@
 
 let partida;
 
+function crearTablero() {
+  let casillas = 1;
+  const columnas = ['a', 'b', 'c'];
+  const div = document.createElement('div');
+  const tabla = document.createElement('table');
+const caption = document.createElement('caption');
+
+div.role = 'application';
+tabla.id = 'tablero';
+caption.id = 'marcador';
+caption.ariaLive = 'polite';
+
+  document.body.appendChild(div);
+  div.appendChild(tabla);
+  tabla.appendChild(caption);
+
+for (let fila = 1; fila <= columnas.length; fila++) {
+  const tr = document.createElement('tr');
+  tabla.appendChild(tr);
+  columnas.forEach(columna => {
+    const td = document.createElement('td');
+    td.id = columna+fila.toString();
+    td.tabIndex = casillas++;
+    tr.appendChild(td);
+  })
+}
+document.querySelector('#b2').focus();
+}
+
 function empezarPartida() {
   empezar.disabled = true;
   let jugadorX = new Jugador(document.getElementById("X"));
   let jugadorO = new Jugador(document.getElementById("O"));
+  crearTablero();
   partida = new Partida(jugadorX, jugadorO);
 }
 
