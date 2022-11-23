@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tres en raya</title>
-    <link rel="stylesheet" href="css/ejer5.css">
+    <link rel="stylesheet" href="css/ejer5.css" />
     <script src="scripts/jugador.js"></script>
     <script src="scripts/maquina.js"></script>
     <script src="scripts/partida.js"></script>
     <script src="scripts/tablero.js"></script>
-    <script src="scripts/ejer5.js"></script>
-</head>
+    <script src="scripts/aplicacion.js"></script>
+  </head>
 
-<body>
+  <body>
     <h1>Tres en raya</h1>
     <label for="X">Jugador X:</label>
     <select id="X">
-        <option value="humano">Humano</option>
-        <option value="maquina">Máquina</option>
+      <option value="humano">Humano</option>
+      <option value="maquina">Máquina</option>
     </select>
-    <br>
+    <br />
     <label for="O">Jugador O:</label>
     <select id="O">
-        <option value="humano">Humano</option>
-        <option value="maquina">Máquina</option>
+      <option value="humano">Humano</option>
+      <option value="maquina">Máquina</option>
     </select>
-    <br>
+    <br />
     <button id="empezar">Empezar partida</button>
 
     <audio id="movimiento" src="./audio/movimiento.wav" preload="auto"></audio>
     <audio id="victoria" src="./audio/victoria.wav" preload="auto"></audio>
     <audio id="empate" src="./audio/empate.wav" preload="auto"></audio>
-</body>
-
+  </body>
 </html>
