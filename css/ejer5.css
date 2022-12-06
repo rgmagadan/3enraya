@@ -1,3 +1,33 @@
+body{
+  margin:5px;
+  font-size: 100%;
+  line-height: 1.6em;
+  font-family:Arial;
+}
+
+#formulario{
+  position: relative;
+  top:1em;
+  left: 30%;
+}
+
+#empezar{
+  position: relative;
+  top:1em;
+  left: 2em;
+}
+
+#marcador{
+  margin-bottom:1em;
+}
+
+#juego{
+  position: relative;
+  top:3em;
+  left: 30%;
+  margin:1em;
+}
+
 table {
   border: 1px solid black;
   border-collapse: collapse;
