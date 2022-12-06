@@ -1,6 +1,7 @@
 let partida;
 
 function crearTablero() {
+  const contenedor = document.querySelector("#container");
   let casillas = 1;
   const columnas = ["a", "b", "c"];
   const div = document.createElement("div");
@@ -12,8 +13,8 @@ function crearTablero() {
   caption.id = "marcador";
   caption.ariaLive = "polite";
 
-  document.body.appendChild(div);
-  div.id = 'juego';
+  contenedor.appendChild(div);
+  div.id = "juego";
   div.appendChild(tabla);
   tabla.appendChild(caption);
 
@@ -31,10 +32,10 @@ function crearTablero() {
 }
 
 function empezarPartida() {
-  const juego = document.querySelector('#juego');
+  const juego = document.querySelector("#juego");
   if (juego) {
-  document.body.removeChild(juego);
-}
+    document.querySelector('#container').removeChild(juego);
+  }
   empezar.disabled = true;
   let jugadorX = new Jugador(document.getElementById("X"));
   let jugadorO = new Jugador(document.getElementById("O"));

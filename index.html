@@ -14,23 +14,24 @@
   </head>
 
   <body>
-    <div id="formulario">
-    <h1>Tres en raya</h1>
-    <label for="X">Jugador X:</label>
-    <select id="X">
-      <option value="humano">Humano</option>
-      <option value="maquina">Máquina</option>
-    </select>
-    <br />
-    <label for="O">Jugador O:</label>
-    <select id="O">
-      <option value="humano">Humano</option>
-      <option value="maquina">Máquina</option>
-    </select>
-    <br />
-    <button id="empezar">Empezar partida</button>
-  </div>
-
+    <div id="container">
+      <div id="formulario">
+        <h1>Tres en raya</h1>
+        <label for="X">Jugador X:</label>
+        <select id="X">
+          <option value="humano">Humano</option>
+          <option value="maquina">Máquina</option>
+        </select>
+        <br />
+        <label for="O">Jugador O:</label>
+        <select id="O">
+          <option value="humano">Humano</option>
+          <option value="maquina">Máquina</option>
+        </select>
+        <br />
+        <button id="empezar">Empezar partida</button>
+      </div>
+    </div>
     <audio id="movimiento" src="./audio/movimiento.wav" preload="auto"></audio>
     <audio id="victoria" src="./audio/victoria.wav" preload="auto"></audio>
     <audio id="empate" src="./audio/empate.wav" preload="auto"></audio>
