@@ -31,7 +31,10 @@ function crearTablero() {
 }
 
 function empezarPartida() {
-  // document.body.removeChild(document.querySelector('#juego'));
+  const juego = document.querySelector('#juego');
+  if (juego) {
+  document.body.removeChild(juego);
+}
   empezar.disabled = true;
   let jugadorX = new Jugador(document.getElementById("X"));
   let jugadorO = new Jugador(document.getElementById("O"));
