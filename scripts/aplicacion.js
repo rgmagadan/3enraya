@@ -13,6 +13,7 @@ function crearTablero() {
   caption.ariaLive = "polite";
 
   document.body.appendChild(div);
+  div.id = 'juego';
   div.appendChild(tabla);
   tabla.appendChild(caption);
 
@@ -30,6 +31,7 @@ function crearTablero() {
 }
 
 function empezarPartida() {
+  document.body.removeChild(document.querySelector('#juego'));
   empezar.disabled = true;
   let jugadorX = new Jugador(document.getElementById("X"));
   let jugadorO = new Jugador(document.getElementById("O"));
