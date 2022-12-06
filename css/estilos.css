@@ -12,9 +12,14 @@ body{
   transform: translate(-50%, -50%);
 }
 
-label{margin-left:0.5em;}
+h1{
+  padding-top:30%;
+  text-align: center;
+}
 
-#empezar{margin:1em 0em 0em 2.2em;}
+label{margin-left:3%;}
+
+#empezar{margin:1em 0em 0em 15%;}
 
 #marcador{margin:1em 0em 1em;}
 
