@@ -5,27 +5,30 @@ body{
   font-family:Arial;
 }
 
-#formulario{
-  position: relative;
-  top:1em;
-  left: 30%;
+#container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#empezar{
-  position: relative;
-  top:1em;
-  left: 2em;
+label{margin-left:0.5em;}
+
+#empezar{margin:1em 0em 0em 2em;}
+
+#marcador{margin:1em 0em 1em;}
+
+#juego{margin:1em;}
+
+#jugada{
+  position:relative;
+  top: -1.5em;
+  left:39%;
 }
 
-#marcador{
-  margin-bottom:1em;
-}
-
-#juego{
+#infoPartida{
   position: relative;
-  top:3em;
-  left: 30%;
-  margin:1em;
+  left:-5%;
 }
 
 table {
