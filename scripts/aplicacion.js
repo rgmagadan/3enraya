@@ -43,6 +43,7 @@ function empezarPartida() {
 }
 
 function ponerFicha(e) {
+  if (e.code === "Escape") empezar.focus();
   if (e.code === "ArrowRight") {
     if (e.target === a1) b1.focus();
     if (e.target === a2) b2.focus();

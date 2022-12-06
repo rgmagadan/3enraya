@@ -22,7 +22,7 @@ class Partida {
     if (this._jugadorQueTieneElTurno.tipo == "humano") {
       setTimeout(
         () =>
-          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span<span id="infoPartida">Es el turno de ${this._jugadorQueTieneElTurno.ficha}</pan>`),
+          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span><span id="infoPartida">Es el turno de ${this._jugadorQueTieneElTurno.ficha}</span>`),
         100
       );
     }
