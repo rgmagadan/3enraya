@@ -22,7 +22,7 @@ class Partida {
     if (this._jugadorQueTieneElTurno.tipo == "humano") {
       setTimeout(
         () =>
-          (marcador.innerText = `${idCasilla}. Es el turno de ${this._jugadorQueTieneElTurno.ficha}`),
+          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span<span id="infoPartida">Es el turno de ${this._jugadorQueTieneElTurno.ficha}</pan>`),
         100
       );
     }
@@ -48,7 +48,8 @@ class Partida {
       document.querySelector("#victoria").play();
       setTimeout(
         () =>
-          (marcador.innerText = `${idCasilla}. ${this._jugadorQueTieneElTurno.ficha} ha ganado la partida.`),
+          (marcador.innerText = `${idCasilla}
+          ${this._jugadorQueTieneElTurno.ficha} ha ganado la partida.`),
         500
       );
       empezar.disabled = false;
@@ -56,7 +57,8 @@ class Partida {
       document.querySelector("#empate").play();
       setTimeout(
         () =>
-          (marcador.innerText = `${idCasilla}. La partida ha terminado en empate.`),
+          (marcador.innerText = `${idCasilla}
+          La partida ha terminado en empate.`),
         100
       );
       empezar.disabled = false;
