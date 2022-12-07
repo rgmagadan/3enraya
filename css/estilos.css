@@ -5,27 +5,41 @@ body{
   font-family:Arial;
 }
 
-#formulario{
-  position: relative;
-  top:1em;
-  left: 30%;
+#container {
+  display: grid;
+  place-content: center;
+}
+
+h1{
+  padding-top:30%;
+  text-align: center;
+}
+
+label{
+  margin-left:5%;
+  text-align: center;
 }
 
 #empezar{
   position: relative;
-  top:1em;
-  left: 2em;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#marcador{
-  margin-bottom:1em;
+#marcador{margin:1em 0em 1em;}
+
+#juego{margin:1em;}
+
+#jugada{
+  position:relative;
+  top: -1.5em;
+  left:39%;
 }
 
-#juego{
+#infoPartida{
   position: relative;
-  top:3em;
-  left: 30%;
-  margin:1em;
+  left:-5%;
 }
 
 table {
