@@ -48,7 +48,7 @@ class Partida {
       document.querySelector("#victoria").play();
       setTimeout(
         () =>
-          (marcador.innerHTML = `<span>${idCasilla}</span><span>${this._jugadorQueTieneElTurno.ficha} ha ganado la partida.</span>`),
+          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span><span id="infoPartida">${this._jugadorQueTieneElTurno.ficha} ha ganado la partida.</span>`),
         500
       );
       empezar.disabled = false;
@@ -56,7 +56,7 @@ class Partida {
       document.querySelector("#empate").play();
       setTimeout(
         () =>
-          (marcador.innerText = `<span>${idCasilla}</span><span>La partida ha terminado en empate.</span>`),
+          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span><span id="infoPartida">La partida ha terminado en empate.</span>`),
         100
       );
       empezar.disabled = false;
