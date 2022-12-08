@@ -56,7 +56,7 @@ class Partida {
       document.querySelector("#empate").play();
       setTimeout(
         () =>
-          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span><span id="infoPartida">Partida terminada en empate.</span>`),
+          (marcador.innerHTML = `<span id="jugada">${idCasilla}</span><span id="infoPartida">Partida empatada.</span>`),
         100
       );
       empezar.disabled = false;
