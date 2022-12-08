@@ -121,7 +121,7 @@ return true;
   static rayar(linea, sentido, rayar) {
     if (rayar) {
       linea.forEach((casilla) => {
-        casilla.className = "raya";
+        casilla.classList.add("raya");
         casilla.ariaLabel += `, en raya ${sentido}.`;
       });
     }
