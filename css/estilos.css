@@ -15,6 +15,10 @@ h1 {
   text-align: center;
 }
 
+#cajaX select{margin-left:0.12em;}
+
+select {text-align: center;}
+
 label X O {
   display: block;
   text-align: center;
