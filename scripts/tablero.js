@@ -8,17 +8,17 @@ class Tablero {
     const div = document.createElement("div");
     const tabla = document.createElement("table");
     const caption = document.createElement("caption");
-  
+
     div.role = "application";
     tabla.id = "tablero";
     caption.id = "marcador";
     caption.ariaLive = "polite";
-  
+
     contenedor.appendChild(div);
     div.id = "juego";
     div.appendChild(tabla);
     tabla.appendChild(caption);
-  
+
     for (let fila = 1; fila <= columnas.length; fila++) {
       const tr = document.createElement("tr");
       tabla.appendChild(tr);
@@ -28,11 +28,11 @@ class Tablero {
         td.id = columna + fila.toString();
         td.tabIndex = casillas++;
         td.ariaLabel = columna + fila.toString();
-        td.textContent = '·';
-        td.role = 'button';
-          td.addEventListener("click", ponerFicha);
-          td.addEventListener("keydown", ponerFicha);
-          
+        td.textContent = "·";
+        td.role = "button";
+        td.addEventListener("click", ponerFicha);
+        td.addEventListener("keydown", ponerFicha);
+
         tr.appendChild(td);
       });
     }
@@ -43,95 +43,91 @@ class Tablero {
     casilla.ariaLabel = `${ficha}, ${casilla.ariaLabel}`;
     document.querySelector("#movimiento").play();
   }
-  static obtenerPosicion() {
-    let posicion = [Array(3), Array(3), Array(3)];
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        posicion[i][j] = tablero.rows[i].cells[j].textContent;
-      }
-    }
-    return posicion;
+  obtenerPosicion() {
+    return this._casillas
+    .map((casilla) => casilla.id + casilla.textContent);
   }
-  static obtenerCasilla(i, j) {
-    return tablero.rows[i].cells[j];
+  obtenerCasilla(i) {
+    return this._casillas[i];
   }
   static tieneTresEnRaya(ficha, posicion, rayar) {
     // Comprueba columnas
-    for (let i = 0; i < posicion.length; i++) {
-      let cuenta = [];
-      for (let j = 0; j < posicion.length; j++) {
-        if (posicion[j][i] == ficha) {
-          cuenta.push(tablero.rows[j].cells[i]);
-        }
+    const pos = posicion.map(casilla => casilla.charAt(0) + casilla.charAt(2)).filter((casilla) => casilla.charAt(1) === ficha)
+      .map((casilla) => casilla.charAt(0));
+      const letra =
+      pos.filter((letra) => letra === "a").length == 3
+      ? "a"
+      : pos.filter((letra) => letra === "b").length == 3
+      ? "b"
+      : pos.filter((letra) => letra === "c").length == 3
+      ? "c"
+      : "";
+    if (letra != "") {
+      const casillas = [];
+      for (let i = 1; i <= 3; i++) {
+        casillas.push(document.querySelector("#" + letra + i));
       }
-      if (cuenta.length == 3) {
-        Tablero.rayar(cuenta, 'vertical', rayar);
-        return true;
-      }
+      Tablero.rayar(casillas, "vertical", rayar);
+      return true;
     }
     // comprueba filas
-    for (let i = 0; i < posicion.length; i++) {
-      let cuenta = [];
-      for (let j = 0; j < posicion.length; j++) {
-        if (posicion[i][j] == ficha) {
-          cuenta.push(tablero.rows[i].cells[j]);
-        }
-      }
-      if (cuenta.length == 3) {
-        Tablero.rayar(cuenta, 'horizontal', rayar);
+    const posFilas = posicion.map(casilla => casilla.charAt(1) + casilla.charAt(2)).filter((casilla) => casilla.charAt(1) === ficha)
+      .map((casilla) => casilla.charAt(0));
+      const fila =
+      posFilas.filter((n) => n === "1").length == 3
+      ? "1"
+      : posFilas.filter((n) => n === "2").length == 3
+      ? "2"
+      : posFilas.filter((n) => n === "3").length == 3
+      ? "3"
+      : "";
+    if (fila != "") {
+      const casillasFila = [];
+        casillasFila.push(document.querySelector("#a" + fila));
+        casillasFila.push(document.querySelector("#b" + fila));
+        casillasFila.push(document.querySelector("#c" + fila));
+
+        Tablero.rayar(casillasFila, "horizontal", rayar);
         return true;
-      }
     }
     // Comprueba diagonales
-    let diagonal1 = [];
-    let diagonal2 = [];
-    for (let i = 0; i < posicion.length; i++) {
-      if (posicion[i][i] == ficha) {
-        diagonal1.push(tablero.rows[i].cells[i]);
-      }
-    }
-    for (let i = 0, j = 2; i < posicion.length && j >= 0; i++, j--) {
-      if (posicion[i][j] == ficha) {
-        diagonal2.push(tablero.rows[i].cells[j]);
-      }
-    }
-    if (diagonal1.length == 3) {
-      Tablero.rayar(diagonal1, 'diagonal', rayar);
-      return true;
-    } else if (diagonal2.length == 3) {
-      Tablero.rayar(diagonal2, 'diagonal', rayar);
-      return true;
-    } else {
+    if (posicion[4].charAt(2) === ficha) {
+const diagonal = [];
+if (posicion[0].charAt(2) === ficha && posicion[8].charAt(2) === ficha) {
+diagonal.push(a1, b2, c3);
+Tablero.rayar(diagonal, "diagonal", rayar);
+return true;
+} else if (posicion[6].charAt(2) === ficha && posicion[2].charAt(2) === ficha) {
+diagonal.push(a3, b2, c1);
+Tablero.rayar(diagonal, "diagonal", rayar);
+return true;
+  }
+}
       return false;
-    }
   }
   static tieneCasillaLibre(posicion) {
-    for (let i = 0; i < posicion.length; i++) {
-      for (let j = 0; j < posicion.length; j++) {
-        if (posicion[i][j] == "·") {
+    for (let casilla of posicion) {
+      if (casilla.charAt(2) === '·') {
           return true;
-        }
-      }
     }
+  }
     return false;
   }
   static obtenerCasillasLibres(posicion) {
     let casillas = [];
-    for (let i = 0; i < posicion.length; i++) {
-      for (let j = 0; j < posicion.length; j++) {
-        if (posicion[i][j] == "·") {
-          casillas.push([i, j]);
-        }
+    posicion.forEach((casilla, i) => {
+      if (casilla.charAt(2) === '·') {
+        casillas.push(i);
       }
-    }
+    });
     return casillas;
   }
   static rayar(linea, sentido, rayar) {
     if (rayar) {
-    linea.forEach((casilla) => {
-      casilla.className = "raya";
-      casilla.ariaLabel += `, en raya ${sentido}.`;
-    });
-  }
+      linea.forEach((casilla) => {
+        casilla.className = "raya";
+        casilla.ariaLabel += `, en raya ${sentido}.`;
+      });
+    }
   }
 }

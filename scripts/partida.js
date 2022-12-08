@@ -44,7 +44,7 @@ class Partida {
     if (
       Tablero.tieneTresEnRaya(
         this._jugadorQueTieneElTurno.ficha,
-        Tablero.obtenerPosicion(),
+        this._tablero.obtenerPosicion(),
         true
       )
     ) {
@@ -55,7 +55,7 @@ class Partida {
         500
       );
       empezar.disabled = false;
-    } else if (!Tablero.tieneCasillaLibre(Tablero.obtenerPosicion())) {
+    } else if (!Tablero.tieneCasillaLibre(this._tablero.obtenerPosicion())) {
       document.querySelector("#empate").play();
       setTimeout(
         () =>
@@ -68,13 +68,11 @@ class Partida {
     }
   }
   _juegaMaquina() {
-    let coordenadasParaJugar = Maquina.buscarJugada(
-      this._jugadorQueTieneElTurno.ficha
+    const indiceCasilla = Maquina.buscarJugada(
+      this._jugadorQueTieneElTurno.ficha,
+      this._tablero.obtenerPosicion()
     );
-    let casilla = Tablero.obtenerCasilla(
-      coordenadasParaJugar[0],
-      coordenadasParaJugar[1]
-    );
+    const casilla = this._tablero.obtenerCasilla(indiceCasilla);
     this._tablero.ponerFichaEnCasilla(this._jugadorQueTieneElTurno.ficha, casilla);
     this.comprobarSituacion(casilla.id);
   }

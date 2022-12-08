@@ -1,33 +1,38 @@
 class Maquina {
-  static buscarJugada(ficha) {
+  static buscarJugada(ficha, posicion) {
     let fichaRival = ficha == "X" ? "O" : "X";
-    let posicion = Tablero.obtenerPosicion();
-    let coordenadasDeCasillas = Tablero.obtenerCasillasLibres(posicion);
+const casillasLibres = Tablero.obtenerCasillasLibres(posicion);
 
-    for (let coordenadas of coordenadasDeCasillas) {
-      posicion[coordenadas[0]][coordenadas[1]] = ficha;
-      if (Tablero.tieneTresEnRaya(ficha, posicion)) {
-        return coordenadas;
-      }
-      posicion[coordenadas[0]][coordenadas[1]] = "·";
-    }
+let raya = Maquina.probarFicha(posicion, casillasLibres, ficha);
+if (raya != false) {
+  return raya;
+} else {
+   raya = Maquina.probarFicha(posicion, casillasLibres, fichaRival);
+   if (raya != false) {
+    return raya;
+   }
+}
 
-    for (let coordenadas of coordenadasDeCasillas) {
-      posicion[coordenadas[0]][coordenadas[1]] = fichaRival;
-      if (Tablero.tieneTresEnRaya(fichaRival, posicion)) {
-        return coordenadas;
-      }
-      posicion[coordenadas[0]][coordenadas[1]] = "·";
-    }
 
-    for (let coordenadas of coordenadasDeCasillas) {
-      if (coordenadas[0] == 1 && coordenadas[1] == 1) {
-        return coordenadas;
+    for (let casilla of casillasLibres) {
+      if (casilla == 4) {
+        return casilla;
       }
     }
 
-    return coordenadasDeCasillas[
-      Math.floor(Math.random() * coordenadasDeCasillas.length)
+    return casillasLibres[
+      Math.floor(Math.random() * casillasLibres.length)
     ];
   }
+  static probarFicha(posicion, casillasLibres, ficha) {
+    for (let casilla of casillasLibres) {
+      posicion[casilla] = posicion[casilla].substring(0,2) + ficha;
+     if (Tablero.tieneTresEnRaya(ficha, posicion, false)) {
+       return casilla;
+     }
+     posicion[casilla] = posicion[casilla].substring(0,2) + '·';
+   }
+   return false;
+  }
+
 }
