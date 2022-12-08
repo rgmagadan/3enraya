@@ -1,5 +1,9 @@
-body{
-  margin:5px;
+.raya {
+  font-weight: bold;
+}
+
+body {
+  margin: 5px;
   font-size: 100%;
   line-height: 1.6em;
   font-family: Helvetica, Arial, sans-serif;
@@ -10,29 +14,33 @@ body{
   place-content: center;
 }
 
-h1{
-  padding-top:30%;
+h1 {
+  padding-top: 30%;
   text-align: center;
 }
 
 label X O {
-  display:block;
+  display: block;
   text-align: center;
 }
 
-#empezar{
+#empezar {
   position: relative;
   top: 8%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-#marcador{margin:1em 0em 1em;}
+#marcador {
+  margin: 1em 0em 1em;
+}
 
-#juego{margin-left:1em;}
+#juego {
+  margin-left: 1em;
+}
 
-#jugada{
-  display:block;
+#jugada {
+  display: block;
 }
 
 table {

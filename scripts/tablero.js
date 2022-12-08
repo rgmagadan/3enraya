@@ -34,33 +34,54 @@ class Tablero {
     return tablero.rows[i].cells[j];
   }
   static tieneTresEnRaya(ficha, posicion) {
+    // Comprueba columnas
     for (let i = 0; i < posicion.length; i++) {
-      let cuenta = 0;
+      let cuenta = [];
       for (let j = 0; j < posicion.length; j++) {
-        cuenta += posicion[j][i] == ficha ? 1 : 0;
+        if (posicion[j][i] == ficha) {
+          cuenta.push(tablero.rows[j].cells[i]);
+        }
       }
-      if (cuenta == 3) {
+      if (cuenta.length == 3) {
+        Tablero.rayar(cuenta, 'vertical');
         return true;
       }
     }
+    // comprueba filas
     for (let i = 0; i < posicion.length; i++) {
-      let cuenta = 0;
+      let cuenta = [];
       for (let j = 0; j < posicion.length; j++) {
-        cuenta += posicion[i][j] == ficha ? 1 : 0;
+        if (posicion[i][j] == ficha) {
+          cuenta.push(tablero.rows[i].cells[j]);
+        }
       }
-      if (cuenta == 3) {
+      if (cuenta.length == 3) {
+        Tablero.rayar(cuenta, 'horizontal');
         return true;
       }
     }
-    let diagonal1 = 0;
-    let diagonal2 = 0;
+    // Comprueba diagonales
+    let diagonal1 = [];
+    let diagonal2 = [];
     for (let i = 0; i < posicion.length; i++) {
-      diagonal1 += posicion[i][i] == ficha ? 1 : 0;
+      if (posicion[i][i] == ficha) {
+        diagonal1.push(tablero.rows[i].cells[i]);
+      }
     }
     for (let i = 0, j = 2; i < posicion.length && j >= 0; i++, j--) {
-      diagonal2 += posicion[i][j] == ficha ? 1 : 0;
+      if (posicion[i][j] == ficha) {
+        diagonal2.push(tablero.rows[i].cells[j]);
+      }
     }
-    return diagonal1 == 3 || diagonal2 == 3 ? true : false;
+    if (diagonal1.length == 3) {
+      Tablero.rayar(diagonal1, 'diagonal');
+      return true;
+    } else if (diagonal2.length == 3) {
+      Tablero.rayar(diagonal2, 'diagonal');
+      return true;
+    } else {
+      return false;
+    }
   }
   static tieneCasillaLibre(posicion) {
     for (let i = 0; i < posicion.length; i++) {
@@ -82,5 +103,11 @@ class Tablero {
       }
     }
     return casillas;
+  }
+  static rayar(linea, sentido) {
+    linea.forEach((casilla) => {
+      casilla.className = "raya";
+      casilla.ariaLabel += `, en raya ${sentido}.`;
+    });
   }
 }
