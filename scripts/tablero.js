@@ -24,6 +24,7 @@ class Tablero {
         casilla.tabIndex = casillas++;
         casilla.ariaLabel = columna + fila.toString();
         casilla.textContent = "·";
+        casilla.className = 'casilla';
         casilla.role = "button";
         casilla.addEventListener("click", ponerFicha);
         casilla.addEventListener("keydown", ponerFicha);
