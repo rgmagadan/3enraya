@@ -31,7 +31,7 @@ class Partida {
     }
   }
   colocarPosicionInicial() {
-    marcador.innerHTML = `<span id="jugada">*</span><span id="infoPartida">Es el turno de ${this._jugadorQueTieneElTurno.ficha}</span>`;
+    marcador.innerHTML = `<span id="jugada">&nbsp;</span><span id="infoPartida">Es el turno de ${this._jugadorQueTieneElTurno.ficha}</span>`;
     Tablero.posicionInicial();
     Tablero.ponerManejadores();
     if (this._jugadorQueTieneElTurno.tipo == "maquina") {
