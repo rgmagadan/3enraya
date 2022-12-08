@@ -1,9 +1,9 @@
 let partida;
 
 function empezarPartida() {
-  const juego = document.querySelector("#juego");
-  if (juego) {
-    document.querySelector('#container').removeChild(juego);
+  const tablero = document.querySelector("#tablero");
+  if (tablero) {
+    document.querySelector('#container').removeChild(tablero);
   }
   empezar.disabled = true;
   let jugadorX = new Jugador(document.getElementById("X"));
