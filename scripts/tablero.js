@@ -5,35 +5,30 @@ class Tablero {
     const contenedor = document.querySelector("#container");
     let casillas = 1;
     const columnas = ["a", "b", "c"];
-    const div = document.createElement("div");
-    const tabla = document.createElement("table");
-    const caption = document.createElement("caption");
+    const tablero = document.createElement("div");
+    const marcador = document.createElement("div");
 
-    div.role = "application";
-    tabla.id = "tablero";
-    caption.id = "marcador";
-    caption.ariaLive = "polite";
+    tablero.role = "application";
+    tablero.id = "tablero";
+    marcador.id = "marcador";
+    marcador.ariaLive = "polite";
 
-    contenedor.appendChild(div);
-    div.id = "juego";
-    div.appendChild(tabla);
-    tabla.appendChild(caption);
+    contenedor.appendChild(marcador);
+    contenedor.appendChild(tablero);
 
     for (let fila = 1; fila <= columnas.length; fila++) {
-      const tr = document.createElement("tr");
-      tabla.appendChild(tr);
       columnas.forEach((columna) => {
-        const td = document.createElement("td");
-        this._casillas.push(td);
-        td.id = columna + fila.toString();
-        td.tabIndex = casillas++;
-        td.ariaLabel = columna + fila.toString();
-        td.textContent = "·";
-        td.role = "button";
-        td.addEventListener("click", ponerFicha);
-        td.addEventListener("keydown", ponerFicha);
+        const casilla = document.createElement("div");
+        this._casillas.push(casilla);
+        casilla.id = columna + fila.toString();
+        casilla.tabIndex = casillas++;
+        casilla.ariaLabel = columna + fila.toString();
+        casilla.textContent = "·";
+        casilla.role = "button";
+        casilla.addEventListener("click", ponerFicha);
+        casilla.addEventListener("keydown", ponerFicha);
 
-        tr.appendChild(td);
+        tablero.appendChild(casilla);
       });
     }
     document.querySelector("#b2").focus();
