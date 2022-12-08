@@ -33,7 +33,7 @@ class Tablero {
   static obtenerCasilla(i, j) {
     return tablero.rows[i].cells[j];
   }
-  static tieneTresEnRaya(ficha, posicion) {
+  static tieneTresEnRaya(ficha, posicion, rayar) {
     // Comprueba columnas
     for (let i = 0; i < posicion.length; i++) {
       let cuenta = [];
@@ -43,7 +43,7 @@ class Tablero {
         }
       }
       if (cuenta.length == 3) {
-        Tablero.rayar(cuenta, 'vertical');
+        Tablero.rayar(cuenta, 'vertical', rayar);
         return true;
       }
     }
@@ -56,7 +56,7 @@ class Tablero {
         }
       }
       if (cuenta.length == 3) {
-        Tablero.rayar(cuenta, 'horizontal');
+        Tablero.rayar(cuenta, 'horizontal', rayar);
         return true;
       }
     }
@@ -74,10 +74,10 @@ class Tablero {
       }
     }
     if (diagonal1.length == 3) {
-      Tablero.rayar(diagonal1, 'diagonal');
+      Tablero.rayar(diagonal1, 'diagonal', rayar);
       return true;
     } else if (diagonal2.length == 3) {
-      Tablero.rayar(diagonal2, 'diagonal');
+      Tablero.rayar(diagonal2, 'diagonal', rayar);
       return true;
     } else {
       return false;
@@ -104,10 +104,12 @@ class Tablero {
     }
     return casillas;
   }
-  static rayar(linea, sentido) {
+  static rayar(linea, sentido, rayar) {
+    if (rayar) {
     linea.forEach((casilla) => {
       casilla.className = "raya";
       casilla.ariaLabel += `, en raya ${sentido}.`;
     });
+  }
   }
 }

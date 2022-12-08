@@ -42,7 +42,8 @@ class Partida {
     if (
       Tablero.tieneTresEnRaya(
         this._jugadorQueTieneElTurno.ficha,
-        Tablero.obtenerPosicion()
+        Tablero.obtenerPosicion(),
+        true
       )
     ) {
       document.querySelector("#victoria").play();
