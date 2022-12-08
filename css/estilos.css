@@ -29,17 +29,10 @@ label{
 
 #marcador{margin:1em 0em 1em;}
 
-#juego{margin:1em;}
+#juego{margin-left:1em;}
 
 #jugada{
-  position:relative;
-  top: -1.5em;
-  left:39%;
-}
-
-#infoPartida{
-  position: relative;
-  left:-5%;
+  display:block;
 }
 
 table {
