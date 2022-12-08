@@ -1,22 +1,44 @@
 class Tablero {
-  static posicionInicial() {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        tablero.rows[i].cells[j].innerText = "·";
-        tablero.rows[i].cells[j].ariaLabel = tablero.rows[i].cells[j].id;
-        tablero.rows[i].cells[j].role = "button";
-      }
+  constructor() {
+    this._casillas = [];
+
+    const contenedor = document.querySelector("#container");
+    let casillas = 1;
+    const columnas = ["a", "b", "c"];
+    const div = document.createElement("div");
+    const tabla = document.createElement("table");
+    const caption = document.createElement("caption");
+  
+    div.role = "application";
+    tabla.id = "tablero";
+    caption.id = "marcador";
+    caption.ariaLive = "polite";
+  
+    contenedor.appendChild(div);
+    div.id = "juego";
+    div.appendChild(tabla);
+    tabla.appendChild(caption);
+  
+    for (let fila = 1; fila <= columnas.length; fila++) {
+      const tr = document.createElement("tr");
+      tabla.appendChild(tr);
+      columnas.forEach((columna) => {
+        const td = document.createElement("td");
+        this._casillas.push(td);
+        td.id = columna + fila.toString();
+        td.tabIndex = casillas++;
+        td.ariaLabel = columna + fila.toString();
+        td.textContent = '·';
+        td.role = 'button';
+          td.addEventListener("click", ponerFicha);
+          td.addEventListener("keydown", ponerFicha);
+          
+        tr.appendChild(td);
+      });
     }
+    document.querySelector("#b2").focus();
   }
-  static ponerManejadores() {
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        tablero.rows[i].cells[j].addEventListener("click", ponerFicha);
-        tablero.rows[i].cells[j].addEventListener("keydown", ponerFicha);
-      }
-    }
-  }
-  static ponerFichaEnCasilla(ficha, casilla) {
+  ponerFichaEnCasilla(ficha, casilla) {
     casilla.innerText = ficha;
     casilla.ariaLabel = `${ficha}, ${casilla.ariaLabel}`;
     document.querySelector("#movimiento").play();

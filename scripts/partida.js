@@ -3,7 +3,11 @@ class Partida {
     this._jugadorX = jugadorX;
     this._jugadorO = jugadorO;
     this._jugadorQueTieneElTurno = jugadorX;
+    this._tablero = new Tablero();
     this.colocarPosicionInicial();
+  }
+  get tablero() {
+    return this._tablero;
   }
   get jugadorX() {
     return this._jugadorX;
@@ -32,8 +36,6 @@ class Partida {
   }
   colocarPosicionInicial() {
     marcador.innerHTML = `<span id="jugada">&nbsp;</span><span id="infoPartida">Es el turno de ${this._jugadorQueTieneElTurno.ficha}</span>`;
-    Tablero.posicionInicial();
-    Tablero.ponerManejadores();
     if (this._jugadorQueTieneElTurno.tipo == "maquina") {
       this._juegaMaquina();
     }
@@ -73,7 +75,7 @@ class Partida {
       coordenadasParaJugar[0],
       coordenadasParaJugar[1]
     );
-    Tablero.ponerFichaEnCasilla(this._jugadorQueTieneElTurno.ficha, casilla);
+    this._tablero.ponerFichaEnCasilla(this._jugadorQueTieneElTurno.ficha, casilla);
     this.comprobarSituacion(casilla.id);
   }
 }
