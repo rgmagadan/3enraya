@@ -3,15 +3,24 @@ body {
   font-size: 100%;
   line-height: 1.6em;
   font-family: Helvetica, Arial, sans-serif;
-}
-
-#container {
   display: grid;
   place-content: center;
+  background-color:whitesmoke;
+}
+
+#container{  
+  background-color:white;
+  padding:1.5em 1.5em 5em 1.5em;
+  margin-top:1em;
+  border-radius: 1em 1em 0em 0em;
+}
+
+#formulario{
+    display:grid;
+    padding:1em;
 }
 
 h1 {
-  padding-top: 30%;
   text-align: center;
 }
 
@@ -29,17 +38,18 @@ label X O {
 }
 
 #empezar {
-  position: relative;
-  top: 8%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 1.5em 1.5em 0em 1.5em;
 }
 
 #marcador {
   display: grid;
   justify-content: center;
   align-items: center;
-  margin: 1.5em 0em 1.5em;
+  margin: 0.1em 0em 1.5em;
 }
 
 #jugada {
@@ -75,4 +85,9 @@ label X O {
 
 audio {
   display: none;
+}
+
+footer{
+  text-align: center;
+  border-top: 1px solid grey;
 }
