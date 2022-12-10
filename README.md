@@ -1,7 +1,11 @@
 # 3enraya
 
-Esta fue una tarea para el módulo de Desarrollo en el Entorno Cliente de del Ciclo superior de Desarrollo de Aplicaciones Web.
+En su origen esta fue una tarea para el módulo de Desarrollo en el Entorno Cliente de del Ciclo superior de Desarrollo de Aplicaciones Web.
 
-Con fines de aprendizaje, cualquier aportación para hacer más accesible la interfaz, mejorar su diseño o conseguir el juego perfecto de la máquina será bien recibida.
+Se ha mejorado mucho la accesibilidad con lector de pantalla enriqueciendo la interfaz con Aria y prescindiendo de la tabla original que formaba el tablero.
 
-En todo caso, diviértete jugando al [tres en raya](https://rgmagadan.github.io/3enraya).
+La presentación visual de la página ahora es más agradable gracias a las aportaciones de [JM Castiñeira](https://github.com/jmcastinheira).
+
+Con fines de aprendizaje, lo que me gustaría en una futura versión es conseguir el juego perfecto del autómata, tal vez con *minimax*.
+
+Diviértete jugando al [tres en raya](https://rgmagadan.github.io/3enraya).
