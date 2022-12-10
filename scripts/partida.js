@@ -1,8 +1,8 @@
 class Partida {
-  constructor(jugadorX, jugadorO) {
-    this._jugadorX = jugadorX;
-    this._jugadorO = jugadorO;
-    this._jugadorQueTieneElTurno = jugadorX;
+  constructor() {
+    this._jugadorX = new Jugador(document.getElementById("X"));
+    this._jugadorO = new Jugador(document.getElementById("O"));
+    this._jugadorQueTieneElTurno = this._jugadorX;
     this._tablero = new Tablero();
     this.colocarPosicionInicial();
   }
@@ -41,13 +41,12 @@ class Partida {
     }
   }
   comprobarSituacion(idCasilla) {
-    if (
-      Tablero.tieneTresEnRaya(
-        this._jugadorQueTieneElTurno.ficha,
-        this._tablero.obtenerPosicion(),
-        true
-      )
-    ) {
+    const raya = Tablero.tieneTresEnRaya(
+      this._jugadorQueTieneElTurno.ficha,
+      this._tablero.obtenerPosicion()
+    );
+    if (raya != false) {
+      this._tablero.rayar(raya.casillas, raya.sentido);
       document.querySelector("#victoria").play();
       setTimeout(
         () =>
@@ -73,7 +72,7 @@ class Partida {
       this._tablero.obtenerPosicion()
     );
     const casilla = this._tablero.obtenerCasilla(indiceCasilla);
-    this._tablero.ponerFichaEnCasilla(this._jugadorQueTieneElTurno.ficha, casilla);
+    this._tablero.ponerFicha(this._jugadorQueTieneElTurno.ficha, casilla);
     this.comprobarSituacion(casilla.id);
   }
 }

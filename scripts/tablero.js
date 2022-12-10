@@ -1,10 +1,10 @@
 class Tablero {
-  constructor() {
-    this._casillas = [];
+  static columnas = ["a", "b", "c"];
+  static filas = ["1", "2", "3"];
 
+  constructor() {
     const contenedor = document.querySelector("#container");
     let casillas = 1;
-    const columnas = ["a", "b", "c"];
     const tablero = document.createElement("div");
     const marcador = document.createElement("div");
 
@@ -16,114 +16,132 @@ class Tablero {
     contenedor.appendChild(marcador);
     contenedor.appendChild(tablero);
 
-    for (let fila = 1; fila <= columnas.length; fila++) {
-      columnas.forEach((columna) => {
+    Tablero.filas.forEach((fila) => {
+      Tablero.columnas.forEach((columna) => {
         const casilla = document.createElement("div");
-        this._casillas.push(casilla);
-        casilla.id = columna + fila.toString();
+        casilla.id = columna + fila;
+        casilla.ariaLabel = columna + fila;
         casilla.tabIndex = casillas++;
-        casilla.ariaLabel = columna + fila.toString();
         casilla.textContent = "·";
-        casilla.className = 'casilla';
+        casilla.className = "casilla";
         casilla.role = "button";
-        casilla.addEventListener("click", ponerFicha);
-        casilla.addEventListener("keydown", ponerFicha);
-
+        casilla.addEventListener("click", Tablero.manejarCasilla);
+        casilla.addEventListener("keydown", Tablero.manejarCasilla);
         tablero.appendChild(casilla);
       });
-    }
+    });
+    this._casillas = [...document.querySelectorAll(".casilla")];
     document.querySelector("#b2").focus();
   }
-  ponerFichaEnCasilla(ficha, casilla) {
+
+  ponerFicha(ficha, casilla) {
     casilla.innerText = ficha;
     casilla.ariaLabel = `${ficha}, ${casilla.ariaLabel}`;
     document.querySelector("#movimiento").play();
   }
   obtenerPosicion() {
-    return this._casillas
-    .map((casilla) => casilla.id + casilla.textContent);
+    return this._casillas.map((casilla, i) => ({
+      columna: casilla.id.charAt(0),
+      fila: casilla.id.charAt(1),
+      ficha: casilla.textContent,
+      index: i,
+    }));
   }
   obtenerCasilla(i) {
     return this._casillas[i];
   }
-  static tieneTresEnRaya(ficha, posicion, rayar) {
+  static tieneTresEnRaya(ficha, posicion) {
     // Comprueba columnas
-    const pos = posicion.map(casilla => casilla.charAt(0) + casilla.charAt(2)).filter((casilla) => casilla.charAt(1) === ficha)
-      .map((casilla) => casilla.charAt(0));
-      const letra =
-      pos.filter((letra) => letra === "a").length == 3
-      ? "a"
-      : pos.filter((letra) => letra === "b").length == 3
-      ? "b"
-      : pos.filter((letra) => letra === "c").length == 3
-      ? "c"
-      : "";
-    if (letra != "") {
-      const casillas = [];
-      for (let i = 1; i <= 3; i++) {
-        casillas.push(document.querySelector("#" + letra + i));
+    for (const c of Tablero.columnas) {
+      const columna = posicion
+        .filter((casilla) => casilla.ficha === ficha && casilla.columna === c)
+        .map((casilla) => casilla.index);
+      if (columna.length == 3) {
+        return { casillas: columna, sentido: "vertical" };
       }
-      Tablero.rayar(casillas, "vertical", rayar);
-      return true;
     }
     // comprueba filas
-    const posFilas = posicion.map(casilla => casilla.charAt(1) + casilla.charAt(2)).filter((casilla) => casilla.charAt(1) === ficha)
-      .map((casilla) => casilla.charAt(0));
-      const fila =
-      posFilas.filter((n) => n === "1").length == 3
-      ? "1"
-      : posFilas.filter((n) => n === "2").length == 3
-      ? "2"
-      : posFilas.filter((n) => n === "3").length == 3
-      ? "3"
-      : "";
-    if (fila != "") {
-      const casillasFila = [];
-        casillasFila.push(document.querySelector("#a" + fila));
-        casillasFila.push(document.querySelector("#b" + fila));
-        casillasFila.push(document.querySelector("#c" + fila));
-
-        Tablero.rayar(casillasFila, "horizontal", rayar);
-        return true;
+    for (const f of Tablero.filas) {
+      const fila = posicion
+        .filter((casilla) => casilla.ficha === ficha && casilla.fila === f)
+        .map((casilla) => casilla.index);
+      if (fila.length == 3) {
+        return { casillas: fila, sentido: "horizontal" };
+      }
     }
     // Comprueba diagonales
-    if (posicion[4].charAt(2) === ficha) {
-const diagonal = [];
-if (posicion[0].charAt(2) === ficha && posicion[8].charAt(2) === ficha) {
-diagonal.push(a1, b2, c3);
-Tablero.rayar(diagonal, "diagonal", rayar);
-return true;
-} else if (posicion[6].charAt(2) === ficha && posicion[2].charAt(2) === ficha) {
-diagonal.push(a3, b2, c1);
-Tablero.rayar(diagonal, "diagonal", rayar);
-return true;
-  }
-}
-      return false;
+    if (posicion[4].ficha === ficha) {
+      const diagonal = [];
+      if (posicion[0].ficha === ficha && posicion[8].ficha === ficha) {
+        diagonal.push(0, 4, 8);
+        return { casillas: diagonal, sentido: "diagonal" };
+      } else if (posicion[6].ficha === ficha && posicion[2].ficha === ficha) {
+        diagonal.push(6, 4, 2);
+        return { casillas: diagonal, sentido: "diagonal" };
+      }
+    }
+    return false;
   }
   static tieneCasillaLibre(posicion) {
-    for (let casilla of posicion) {
-      if (casilla.charAt(2) === '·') {
-          return true;
+    for (const casilla of posicion) {
+      if (casilla.ficha === "·") {
+        return true;
+      }
     }
-  }
     return false;
   }
   static obtenerCasillasLibres(posicion) {
-    let casillas = [];
-    posicion.forEach((casilla, i) => {
-      if (casilla.charAt(2) === '·') {
-        casillas.push(i);
-      }
-    });
-    return casillas;
+    return posicion
+      .filter((casilla) => casilla.ficha === "·")
+      .map((casilla) => casilla.index);
   }
-  static rayar(linea, sentido, rayar) {
-    if (rayar) {
-      linea.forEach((casilla) => {
-        casilla.classList.add("raya");
-        casilla.ariaLabel += `, en raya ${sentido}.`;
-      });
+  rayar(linea, sentido) {
+    linea.forEach((index) => {
+      this._casillas[index].classList.add("raya");
+      this._casillas[index].ariaLabel += `, en raya ${sentido}.`;
+    });
+  }
+  static manejarCasilla(e) {
+    if (e.code === "Escape") empezar.focus();
+    if (e.code === "ArrowRight") {
+      if (e.target === a1) b1.focus();
+      if (e.target === a2) b2.focus();
+      if (e.target === a3) b3.focus();
+      if (e.target === b1) c1.focus();
+      if (e.target === b2) c2.focus();
+      if (e.target === b3) c3.focus();
+    } else if (e.code === "ArrowLeft") {
+      if (e.target === c1) b1.focus();
+      if (e.target === c2) b2.focus();
+      if (e.target === c3) b3.focus();
+      if (e.target === b1) a1.focus();
+      if (e.target === b2) a2.focus();
+      if (e.target === b3) a3.focus();
+    } else if (e.code === "ArrowUp") {
+      if (e.target === a3) a2.focus();
+      if (e.target === a2) a1.focus();
+      if (e.target === b3) b2.focus();
+      if (e.target === b2) b1.focus();
+      if (e.target === c3) c2.focus();
+      if (e.target === c2) c1.focus();
+    } else if (e.code === "ArrowDown") {
+      if (e.target === a1) a2.focus();
+      if (e.target === a2) a3.focus();
+      if (e.target === b1) b2.focus();
+      if (e.target === b2) b3.focus();
+      if (e.target === c1) c2.focus();
+      if (e.target === c2) c3.focus();
+    } else if (
+      (e.code === "Enter" || e.code === "Space" || e.type === "click") &&
+      empezar.disabled &&
+      e.target.textContent === "·" &&
+      partida.jugadorQueTieneElTurno.tipo === "humano"
+    ) {
+      partida.tablero.ponerFicha(
+        partida.jugadorQueTieneElTurno.ficha,
+        e.target
+      );
+      partida.comprobarSituacion(e.target.id);
     }
   }
 }

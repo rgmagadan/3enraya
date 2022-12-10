@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tres en raya</title>
     <link rel="stylesheet" href="css/estilos.css" />
-    <script src="scripts/jugador.js"></script>
-    <script src="scripts/maquina.js"></script>
-    <script src="scripts/partida.js"></script>
-    <script src="scripts/tablero.js"></script>
-    <script src="scripts/aplicacion.js"></script>
   </head>
 
   <body>
@@ -18,24 +13,43 @@
       <div id="formulario">
         <h1>Tres en raya</h1>
         <div id="cajaX">
-        <label for="X">Jugador X:</label>
-        <select id="X">
-          <option value="humano">Persona</option>
-          <option value="maquina">Autómata</option>
-        </select>
-      </div>
-      <div id="cajaO">
-        <label for="O">Jugador O:</label>
-        <select id="O">
-          <option value="humano">Persona</option>
-          <option value="maquina">Autómata</option>
-        </select>
-      </div>
+          <label for="X">Jugador X:</label>
+          <select id="X">
+            <option value="humano">Persona</option>
+            <option value="maquina">Autómata</option>
+          </select>
+        </div>
+        <div id="cajaO">
+          <label for="O">Jugador O:</label>
+          <select id="O">
+            <option value="humano">Persona</option>
+            <option value="maquina">Autómata</option>
+          </select>
+        </div>
         <button id="empezar">Empezar partida</button>
       </div>
     </div>
     <audio id="movimiento" src="./audio/movimiento.wav" preload="auto"></audio>
     <audio id="victoria" src="./audio/victoria.wav" preload="auto"></audio>
     <audio id="empate" src="./audio/empate.wav" preload="auto"></audio>
+
+    <footer>
+      <small>
+        <p>
+          Desarrollado por
+          <a href="https://github.com/rgmagadan/">Ramón García</a>
+        </p>
+        <p>
+          Con CSS de
+          <a href="https://github.com/jmcastinheira">JM Castiñeira</a>
+        </p>
+      </small>
+    </footer>
+
+    <script src="scripts/aplicacion.js"></script>
+    <script src="scripts/partida.js"></script>
+    <script src="scripts/jugador.js"></script>
+    <script src="scripts/tablero.js"></script>
+    <script src="scripts/maquina.js"></script>
   </body>
 </html>

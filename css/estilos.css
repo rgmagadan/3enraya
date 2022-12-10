@@ -15,9 +15,13 @@ h1 {
   text-align: center;
 }
 
-#cajaX select{margin-left:0.12em;}
+#cajaX select {
+  margin-left: 0.12em;
+}
 
-select {text-align: center;}
+select {
+  text-align: center;
+}
 
 label X O {
   display: block;
@@ -33,19 +37,19 @@ label X O {
 
 #marcador {
   display: grid;
-	justify-content: center;
-	align-items: center;
+  justify-content: center;
+  align-items: center;
   margin: 1.5em 0em 1.5em;
 }
 
 #jugada {
   display: flex;
-	justify-content: center;
-	align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 #tablero {
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 0px;
@@ -61,8 +65,8 @@ label X O {
   border-left: 1px solid black;
   margin-left: -2px;
   margin-bottom: -2px;
-	justify-content: center;
-	align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .raya {
